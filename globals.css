@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+  background-color: #FAF7F0;
+  color: #1F2933;
+  background-image:
+    repeating-linear-gradient(45deg, rgba(31,41,51,0.035) 0px, rgba(31,41,51,0.035) 1px, transparent 1px, transparent 11px),
+    repeating-linear-gradient(-45deg, rgba(31,41,51,0.035) 0px, rgba(31,41,51,0.035) 1px, transparent 1px, transparent 11px);
+}
+
+/* Darker fabric-weave variant, for use on the charcoal nav/sidebar surfaces */
+.fabric-weave-dark {
+  background-image:
+    repeating-linear-gradient(45deg, rgba(255,255,255,0.035) 0px, rgba(255,255,255,0.035) 1px, transparent 1px, transparent 11px),
+    repeating-linear-gradient(-45deg, rgba(255,255,255,0.035) 0px, rgba(255,255,255,0.035) 1px, transparent 1px, transparent 11px);
+}
+
+/* Hand-stitched thread line: a dashed "marching" animation, like thread being pulled through */
+@keyframes stitch-march {
+  to { stroke-dashoffset: -24; }
+}
+.stitch-line {
+  stroke-dasharray: 6 6;
+  animation: stitch-march 1.4s linear infinite;
+}
+
+/* Spinning bobbin/spool, used as the loading indicator */
+@keyframes spool-spin {
+  to { transform: rotate(360deg); }
+}
+.spool-spin {
+  animation: spool-spin 0.9s linear infinite;
+  transform-origin: 12px 12px;
+}
+
+/* Gentle rise-and-fade for cards/sections as they appear */
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-rise {
+  animation: rise-in 0.35s ease-out both;
+}
+
+.input {
+  @apply w-full border border-line bg-card rounded px-3 py-2 text-ink text-[15px]
+    focus:outline-none focus:ring-2 focus:ring-brass/40 focus:border-brass;
+}
+
+.label {
+  @apply block text-sm text-muted mb-1;
+}
+
+.btn-primary {
+  @apply relative bg-brass text-white rounded px-4 py-2 font-medium text-[15px] overflow-hidden
+    hover:bg-brass-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed;
+}
+/* A thread "pulled taut" underline that draws in on hover — subtle, not gimmicky */
+.btn-primary::after {
+  content: "";
+  position: absolute; left: 0; bottom: 0; height: 2px; width: 0;
+  background: rgba(255, 255, 255, 0.55);
+  transition: width 0.25s ease;
+}
+.btn-primary:hover::after {
+  width: 100%;
+}
+
+.btn-secondary {
+  @apply bg-transparent border border-line text-ink rounded px-4 py-2 font-medium text-[15px]
+    hover:border-brass hover:text-brass-dark transition-colors;
+}
+
+.card {
+  @apply bg-card border border-line rounded p-4;
+  border-top: 2px solid rgba(168, 121, 30, 0.18);
+}
+
+/* A slightly lifted card, for surfaces that sit on the textured background (login, empty states) */
+.card-raised {
+  @apply bg-card border border-line rounded p-6 shadow-[0_1px_3px_rgba(31,41,51,0.08),0_8px_24px_rgba(31,41,51,0.06)];
+  border-top: 3px solid #A8791E;
+}
+
+/* Gentle pendulum sway for the hanging "Bane Brothers" tag */
+@keyframes tag-sway {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(2deg); }
+}
